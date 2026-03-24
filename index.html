@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jude Shattuck | Civil Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soil: #1a1208;
+            --concrete: #c8c0b0;
+            --steel: #4a5568;
+            --amber: #d4860a;
+            --cream: #f5f0e8;
+            --white: #fdfcfa;
+            --dark: #0f0c07;
+            --text: #2d2416;
+            --light-text: #6b5e4a;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 3rem;
+            background: rgba(15,12,7,0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212,134,10,0.2);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            color: var(--amber);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--concrete);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--amber); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: var(--dark);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                    radial-gradient(ellipse at 70% 50%, rgba(212,134,10,0.08) 0%, transparent 60%),
+                    linear-gradient(135deg, rgba(26,18,8,1) 0%, rgba(15,12,7,1) 100%);
+            pointer-events: none;
+        }
+
+        /* Subtle grid texture */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                    linear-gradient(rgba(212,134,10,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(212,134,10,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-text {
+            padding: 8rem 3rem 4rem 6rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.9s ease both;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            animation: fadeUp 0.9s 0.1s ease both;
+        }
+
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.0;
+            margin-bottom: 1rem;
+            animation: fadeUp 0.9s 0.2s ease both;
+        }
+
+        .hero-name span {
+            color: var(--amber);
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--concrete);
+            max-width: 420px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            animation: fadeUp 0.9s 0.35s ease both;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            animation: fadeUp 0.9s 0.45s ease both;
+        }
+
+        .badge {
+            padding: 0.4rem 1rem;
+            border: 1px solid rgba(212,134,10,0.4);
+            color: var(--concrete);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        .hero-image-wrap {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 2;
+            animation: fadeIn 1.2s 0.3s ease both;
+        }
+
+        .hero-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            filter: grayscale(20%) contrast(1.05);
+        }
+
+        .hero-image-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--dark) 0%, transparent 35%);
+            z-index: 1;
+        }
+
+        /* ABOUT */
+        .about {
+            padding: 8rem 6rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            background: var(--white);
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--amber);
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--soil);
+        }
+
+        .about-text p {
+            color: var(--light-text);
+            line-height: 1.85;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stat-block {
+            padding: 2rem;
+            background: var(--cream);
+            border-left: 3px solid var(--amber);
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--soil);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-desc {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        /* EXPERIENCE */
+        .experience {
+            padding: 8rem 6rem;
+            background: var(--soil);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience::before {
+            content: '';
+            position: absolute;
+            top: -200px; right: -200px;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,134,10,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .experience .section-title {
+            color: var(--white);
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-top: 4rem;
+        }
+
+        .exp-card {
+            background: rgba(255,255,255,0.04);
+            padding: 3rem;
+            border: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            transition: background 0.3s;
+            overflow: hidden;
+        }
+
+        .exp-card:hover {
+            background: rgba(212,134,10,0.07);
+        }
+
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--amber);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .exp-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .exp-company {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+        }
+
+        .exp-role {
+            color: var(--amber);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .exp-date {
+            color: rgba(200,192,176,0.5);
+            font-size: 0.78rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .exp-desc {
+            color: var(--concrete);
+            font-size: 0.92rem;
+            line-height: 1.75;
+            font-weight: 300;
+        }
+
+        /* WORK / PHOTOS */
+        .work {
+            padding: 8rem 0;
+            background: var(--cream);
+        }
+
+        .work-header {
+            padding: 0 6rem;
+            margin-bottom: 4rem;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 3px;
+        }
+
+        .photo-item {
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+
+        .photo-item.tall {
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, filter 0.4s ease;
+            filter: saturate(0.85);
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.04);
+            filter: saturate(1.1);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15,12,7,0.7) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .photo-item:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .photo-caption {
+            color: var(--white);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* SKILLS */
+        .skills {
+            padding: 8rem 6rem;
+            background: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            align-items: start;
+        }
+
+        .skill-list {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: 0.04em;
+        }
+
+        .skill-bar-bg {
+            height: 2px;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .skill-bar-fill {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            background: var(--amber);
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.23,1,0.32,1);
+        }
+
+        .activities-list {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.2rem;
+            border: 1px solid var(--cream);
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .activity-item:hover {
+            border-color: var(--amber);
+            background: var(--cream);
+        }
+
+        .activity-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--amber);
+            margin-top: 0.45rem;
+            flex-shrink: 0;
+        }
+
+        .activity-text {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        /* CONTACT */
+        .contact {
+            padding: 8rem 6rem;
+            background: var(--soil);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .contact .section-title {
+            color: var(--white);
+        }
+
+        .contact-sub {
+            color: var(--concrete);
+            font-size: 1rem;
+            line-height: 1.75;
+            font-weight: 300;
+            margin-top: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--white);
+            text-decoration: none;
+            transition: border-color 0.3s, background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--amber);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+        }
+
+        .contact-link:hover {
+            background: rgba(212,134,10,0.05);
+            border-color: rgba(212,134,10,0.3);
+        }
+
+        .contact-link:hover::before {
+            transform: scaleY(1);
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--amber);
+            width: 24px;
+            flex-shrink: 0;
+        }
+
+        .contact-link-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .contact-link-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(200,192,176,0.5);
+            font-weight: 500;
+        }
+
+        .contact-link-value {
+            font-size: 0.95rem;
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            padding: 2rem 6rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            color: rgba(200,192,176,0.35);
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--amber); }
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-logo" href="#">Jude Shattuck</a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#work">Field Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-text">
+        <p class="hero-label">Civil Engineering Student</p>
+        <h1 class="hero-name">Jude<br><span>Shattuck</span></h1>
+        <p class="hero-sub">Rose-Hulman Institute of Technology, class of 2027. Three summers of real field experience across asphalt, concrete, bridge, and transportation design.</p>
+        <div class="hero-badges">
+            <span class="badge">Rose-Hulman</span>
+            <span class="badge">GPA 3.37</span>
+            <span class="badge">Indianapolis Area</span>
+        </div>
+    </div>
+    <div class="hero-image-wrap">
+        <img src="Headshot.jpg" alt="Headshot">
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <div class="about-text reveal">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">From the office to the field</h2>
+        <p>I'm a junior civil engineering student at Rose-Hulman with three summers of hands-on experience across both design consulting and construction. I've spent time in the office doing roadway and bridge design work at Parsons Transportation Group, and out in the field running with asphalt, concrete, grading, and bridge crews at E&B Paving.</p>
+        <p>My goal is to become an engineer who actually understands how things get built. That's shaped every opportunity I've gone after so far.</p>
+    </div>
+    <div class="about-stats reveal reveal-delay-2">
+        <div class="stat-block">
+            <div class="stat-num">3</div>
+            <div class="stat-desc">Summer Internships</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num">3.37</div>
+            <div class="stat-desc">GPA at Rose-Hulman</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num">2</div>
+            <div class="stat-desc">Major Employers</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num">2027</div>
+            <div class="stat-desc">Expected Graduation</div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="experience">
+    <p class="section-label" style="color:var(--amber)">Work Experience</p>
+    <h2 class="section-title reveal">Where I've worked</h2>
+    <div class="exp-grid">
+        <div class="exp-card reveal">
+            <div class="exp-company">E&B Paving</div>
+            <div class="exp-role">Construction Intern</div>
+            <div class="exp-date">June 2025 &ndash; August 2025 &nbsp;&bull;&nbsp; Fishers, IN</div>
+            <p class="exp-desc">Worked directly with field crews across asphalt, concrete, grading, and bridge operations. Got a real look at how transportation infrastructure goes from plans to pavement, including a bridge deck pour and day-to-day site coordination.</p>
+        </div>
+        <div class="exp-card reveal reveal-delay-1">
+            <div class="exp-company">Parsons Transportation Group</div>
+            <div class="exp-role">Engineering Intern</div>
+            <div class="exp-date">June 2024 &ndash; August 2024 &nbsp;&bull;&nbsp; Indianapolis, IN</div>
+            <p class="exp-desc">Led work on a statewide signage repair and replacement project, using Excel and Google Earth extensively for data management and field verification. Developed a stronger sense of how large-scale DOT projects are actually managed.</p>
+        </div>
+        <div class="exp-card reveal reveal-delay-2">
+            <div class="exp-company">Parsons Transportation Group</div>
+            <div class="exp-role">Engineering Intern</div>
+            <div class="exp-date">June 2023 &ndash; August 2023 &nbsp;&bull;&nbsp; Indianapolis, IN</div>
+            <p class="exp-desc">Rotated through Roadway, Bridge, and Environmental departments. Got introduced to MicroStation and Bluebeam, and picked up a solid foundation in how transportation design projects move through their lifecycle from early planning to final delivery.</p>
+        </div>
+        <div class="exp-card reveal reveal-delay-3">
+            <div class="exp-company">Rose-Hulman</div>
+            <div class="exp-role">Freshman Design Project</div>
+            <div class="exp-date">Spring 2024 &nbsp;&bull;&nbsp; Terre Haute, IN</div>
+            <p class="exp-desc">Partnered with Vigo County Schools Corporation to develop an improvement plan for tennis court facilities across the three major high schools in the district. Real client, real deliverable.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FIELD WORK PHOTOS -->
+<section id="work" class="work">
+    <div class="work-header reveal">
+        <p class="section-label">Field Work</p>
+        <h2 class="section-title">Out on site</h2>
+    </div>
+    <div class="photo-grid">
+        <div class="photo-item">
+            <img src="AsphaltTowers.JPG" alt="E&B Paving">
+            <div class="photo-overlay">
+                <span class="photo-caption">E&B Paving &mdash; Asphalt Plant, Fishers IN</span>
+            </div>
+        </div>
+        <div class="photo-item">
+            <img src="Beam.JPG" alt="Bridge Beam Lift">
+            <div class="photo-overlay">
+                <span class="photo-caption">Bridge Beam Lift &mdash; Parsons Site Visit</span>
+            </div>
+        </div>
+        <div class="photo-item">
+            <img src="ConcretePour.JPG"  alt="Bridge Deck Pour">           
+            <div class="photo-overlay">
+                <span class="photo-caption">Bridge Deck Pour &mdash; E&B Paving</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS + ACTIVITIES -->
+<section id="skills" class="skills">
+    <div>
+        <p class="section-label reveal">Technical Skills</p>
+        <h2 class="section-title reveal">Software</h2>
+        <div class="skill-list">
+            <div class="skill-item reveal">
+                <div class="skill-name"><span>Open Roads CAD / AutoCAD</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div>
+            </div>
+            <div class="skill-item reveal reveal-delay-1">
+                <div class="skill-name"><span>Excel</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div>
+            </div>
+            <div class="skill-item reveal reveal-delay-2">
+                <div class="skill-name"><span>ArcGIS</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div>
+            </div>
+            <div class="skill-item reveal reveal-delay-3">
+                <div class="skill-name"><span>MicroStation</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="60"></div></div>
+            </div>
+            <div class="skill-item reveal reveal-delay-4">
+                <div class="skill-name"><span>Google Earth / Bluebeam</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p class="section-label reveal">Involvement</p>
+        <h2 class="section-title reveal">Beyond the Classroom</h2>
+        <div class="activities-list">
+            <div class="activity-item reveal">
+                <div class="activity-dot"></div>
+                <div class="activity-text">Phi Gamma Delta (Fiji) Fraternity, Rho Phi Chapter &mdash; Service Committee Head and Pressing On Committee Head</div>
+            </div>
+            <div class="activity-item reveal reveal-delay-1">
+                <div class="activity-dot"></div>
+                <div class="activity-text">Rose-Hulman Soccer Club (2023 to present)</div>
+            </div>
+            <div class="activity-item reveal reveal-delay-2">
+                <div class="activity-dot"></div>
+                <div class="activity-text">Guerin Catholic Varsity Soccer (2019 to 2023)</div>
+            </div>
+            <div class="activity-item reveal reveal-delay-3">
+                <div class="activity-dot"></div>
+                <div class="activity-text">Faith Formation Catechist, Our Lady of Mount Carmel (2019 to 2023)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <div class="reveal">
+        <p class="section-label">Get in Touch</p>
+        <h2 class="section-title">Let's talk</h2>
+        <p class="contact-sub">I'm actively looking for internship opportunities for Summer 2026. If you're working on something interesting in transportation, infrastructure, or construction, I'd love to hear about it.</p>
+    </div>
+    <div class="contact-links reveal reveal-delay-2">
+        <a href="mailto:shattujr@rose-hulman.edu" class="contact-link">
+            <div class="contact-icon">&#9993;</div>
+            <div class="contact-link-text">
+                <span class="contact-link-label">Email</span>
+                <span class="contact-link-value">shattujr@rose-hulman.edu</span>
+            </div>
+        </a>
+        <a href="tel:3173166433" class="contact-link">
+            <div class="contact-icon">&#9742;</div>
+            <div class="contact-link-text">
+                <span class="contact-link-label">Phone</span>
+                <span class="contact-link-value">(317) 316-6433</span>
+            </div>
+        </a>
+        <a href="#" class="contact-link">
+            <div class="contact-icon">&#127968;</div>
+            <div class="contact-link-text">
+                <span class="contact-link-label">Location</span>
+                <span class="contact-link-value">Carmel, IN / Terre Haute, IN</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<footer>
+    <p>Jude Shattuck &mdash; Civil Engineering, Rose-Hulman Class of 2027</p>
+    <p>Carmel, Indiana</p>
+</footer>
+
+<script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Skill bar animation
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const fills = entry.target.querySelectorAll('.skill-bar-fill');
+                fills.forEach(fill => {
+                    const w = fill.getAttribute('data-width');
+                    setTimeout(() => { fill.style.width = w + '%'; }, 200);
+                });
+                skillObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    const skillSection = document.querySelector('.skills');
+    if (skillSection) skillObserver.observe(skillSection);
+
+    // Subtle nav scroll state
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) {
+            nav.style.borderBottomColor = 'rgba(212,134,10,0.35)';
+        } else {
+            nav.style.borderBottomColor = 'rgba(212,134,10,0.2)';
+        }
+    });
+</script>
+
+</body>
+</html>
