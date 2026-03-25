@@ -72,6 +72,63 @@
 
         .nav-links a:hover { color: var(--amber); }
 
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--concrete);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15,12,7,0.98);
+            z-index: 99;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: var(--concrete);
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .mobile-menu a:hover { color: var(--amber); }
+
         /* HERO */
         .hero {
             min-height: 100vh;
@@ -93,7 +150,6 @@
             pointer-events: none;
         }
 
-        /* Subtle grid texture */
         .hero::after {
             content: '';
             position: absolute;
@@ -132,9 +188,7 @@
             animation: fadeUp 0.9s 0.2s ease both;
         }
 
-        .hero-name span {
-            color: var(--amber);
-        }
+        .hero-name span { color: var(--amber); }
 
         .hero-sub {
             font-size: 1.1rem;
@@ -270,9 +324,7 @@
             pointer-events: none;
         }
 
-        .experience .section-title {
-            color: var(--white);
-        }
+        .experience .section-title { color: var(--white); }
 
         .exp-grid {
             display: grid;
@@ -290,9 +342,7 @@
             overflow: hidden;
         }
 
-        .exp-card:hover {
-            background: rgba(212,134,10,0.07);
-        }
+        .exp-card:hover { background: rgba(212,134,10,0.07); }
 
         .exp-card::before {
             content: '';
@@ -305,9 +355,7 @@
             transition: transform 0.4s ease;
         }
 
-        .exp-card:hover::before {
-            transform: scaleX(1);
-        }
+        .exp-card:hover::before { transform: scaleX(1); }
 
         .exp-company {
             font-family: 'Playfair Display', serif;
@@ -394,9 +442,7 @@
             padding: 1.5rem;
         }
 
-        .photo-item:hover .photo-overlay {
-            opacity: 1;
-        }
+        .photo-item:hover .photo-overlay { opacity: 1; }
 
         .photo-caption {
             color: var(--white);
@@ -500,9 +546,7 @@
             align-items: center;
         }
 
-        .contact .section-title {
-            color: var(--white);
-        }
+        .contact .section-title { color: var(--white); }
 
         .contact-sub {
             color: var(--concrete);
@@ -546,9 +590,7 @@
             border-color: rgba(212,134,10,0.3);
         }
 
-        .contact-link:hover::before {
-            transform: scaleY(1);
-        }
+        .contact-link:hover::before { transform: scaleY(1); }
 
         .contact-icon {
             font-size: 1.2rem;
@@ -625,6 +667,184 @@
         ::-webkit-scrollbar-track { background: var(--dark); }
         ::-webkit-scrollbar-thumb { background: var(--amber); }
 
+
+        /* ============================================
+           RESPONSIVE — TABLET (≤900px)
+        ============================================ */
+        @media (max-width: 900px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+
+            /* Hero stacks vertically */
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: 100vh;
+            }
+
+            .hero-image-wrap {
+                display: none; /* hide photo on tablet, show in mobile hero bg approach */
+            }
+
+            .hero-text {
+                padding: 7rem 2rem 5rem 2rem;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-sub { max-width: 100%; }
+            .hero-badges { justify-content: center; }
+
+            /* About */
+            .about {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 5rem 2.5rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* Experience */
+            .experience {
+                padding: 5rem 2.5rem;
+            }
+
+            .exp-grid {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+
+            .exp-card { padding: 2rem; }
+
+            /* Work */
+            .work { padding: 5rem 0; }
+            .work-header { padding: 0 2.5rem; margin-bottom: 2.5rem; }
+
+            .photo-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* Skills */
+            .skills {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                padding: 5rem 2.5rem;
+            }
+
+            /* Contact */
+            .contact {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 5rem 2.5rem;
+            }
+
+            footer {
+                padding: 1.5rem 2.5rem;
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+
+
+        /* ============================================
+           RESPONSIVE — MOBILE (≤600px)
+        ============================================ */
+        @media (max-width: 600px) {
+            nav { padding: 1rem 1.25rem; }
+
+            /* Hero: show image as background on mobile */
+            .hero {
+                grid-template-columns: 1fr;
+                position: relative;
+            }
+
+            .hero-image-wrap {
+                display: block;
+                position: absolute;
+                inset: 0;
+                height: 100%;
+                z-index: 1;
+            }
+
+            .hero-image-wrap::before {
+                background: linear-gradient(to bottom,
+                rgba(15,12,7,0.75) 0%,
+                rgba(15,12,7,0.6) 50%,
+                rgba(15,12,7,0.85) 100%);
+            }
+
+            .hero-text {
+                position: relative;
+                z-index: 3;
+                padding: 7rem 1.5rem 4rem;
+                text-align: center;
+                align-items: center;
+            }
+
+            .hero-name {
+                font-size: clamp(2.8rem, 12vw, 4rem);
+            }
+
+            .hero-sub { font-size: 0.97rem; }
+
+            /* About */
+            .about {
+                padding: 4rem 1.25rem;
+                gap: 2.5rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .stat-block { padding: 1.25rem 1rem; }
+            .stat-num { font-size: 2.2rem; }
+
+            /* Experience */
+            .experience { padding: 4rem 1.25rem; }
+            .exp-grid { margin-top: 2.5rem; gap: 1px; }
+            .exp-card { padding: 1.5rem; }
+            .exp-company { font-size: 1.2rem; }
+
+            /* Work */
+            .work { padding: 4rem 0; }
+            .work-header { padding: 0 1.25rem; margin-bottom: 2rem; }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-item { aspect-ratio: 16/9; }
+
+            /* Always show caption on mobile (no hover) */
+            .photo-overlay { opacity: 1; }
+
+            /* Skills */
+            .skills { padding: 4rem 1.25rem; gap: 3rem; }
+
+            /* Contact */
+            .contact { padding: 4rem 1.25rem; gap: 2.5rem; }
+            .contact-link { padding: 1.2rem 1.25rem; gap: 1rem; }
+            .contact-link-value { font-size: 0.85rem; word-break: break-all; }
+
+            footer {
+                padding: 1.5rem 1.25rem;
+                flex-direction: column;
+                gap: 0.4rem;
+                text-align: center;
+            }
+
+            footer p { font-size: 0.72rem; }
+        }
     </style>
 </head>
 <body>
@@ -638,7 +858,19 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#experience" class="mobile-nav-link">Experience</a>
+    <a href="#work" class="mobile-nav-link">Field Work</a>
+    <a href="#skills" class="mobile-nav-link">Skills</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -737,7 +969,7 @@
             </div>
         </div>
         <div class="photo-item">
-            <img src="ConcretePour.JPG"  alt="Bridge Deck Pour">           
+            <img src="ConcretePour.JPG" alt="Bridge Deck Pour">
             <div class="photo-overlay">
                 <span class="photo-caption">Bridge Deck Pour &mdash; E&B Paving</span>
             </div>
@@ -835,6 +1067,25 @@
 </footer>
 
 <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
